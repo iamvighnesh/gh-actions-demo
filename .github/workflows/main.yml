@@ -2,13 +2,18 @@ name: Create a staged deployment workflow
 
 on:
   workflow_dispatch:
-  inputs:
-    environment:
-      description: 'Environment to deploy to'
-      type: environment
-      required: true
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        type: environment
+        required: true
 
 jobs:
+    Build:
+      runs-on: ubuntu-latest
+      if: github.event_name == 'workflow_dispatch'
+      steps:
+        - run: echo "🧪 Building..."
     Test:
       runs-on: ubuntu-latest
       if: github.event_name == 'workflow_dispatch'

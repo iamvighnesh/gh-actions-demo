@@ -1,0 +1,16 @@
+name: Create a Release when Pull Request is merged
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          gh release create ${{  github.ref_name }} --generate-notes
